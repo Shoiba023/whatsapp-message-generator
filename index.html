@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biryani Guys - Driver GPS Tracker</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px; }
+    button { padding: 15px 30px; font-size: 16px; margin: 20px; border: none; border-radius: 10px; background-color: #d9230f; color: white; }
+    #status { margin-top: 20px; font-weight: bold; color: green; }
+  </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <h2>📍 Biryani Guys - Driver GPS Tracker</h2>
+  <p>Allow location access to update your position in real-time.</p>
+  <button onclick="sendLocation()">📡 Send Live Location</button>
+  <div id="status"></div>
+
+  <script>
+    // ✅ Your Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBJJX6LbMva8YPe3z7U4pudZQd1MK-oggw",
+      authDomain: "biryani-guys-tracker.firebaseapp.com",
+      databaseURL: "https://biryani-guys-tracker-default-rtdb.firebaseio.com",
+      projectId: "biryani-guys-tracker",
+      storageBucket: "biryani-guys-tracker.firebasestorage.app",
+      messagingSenderId: "388500766779",
+      appId: "1:388500766779:web:cfd69cfacb1be6d2e59c1e",
+      measurementId: "G-NDQD10W2C3"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    function sendLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const timestamp = new Date().toISOString();
+          db.ref("location_data/driver").set({
+            latitude: lat,
+            longitude: lng,
+            timestamp: timestamp
+          }).then(() => {
+            document.getElementById("status").innerText = "✅ Location updated successfully!";
+          }).catch((error) => {
+            document.getElementById("status").innerText = "❌ Error updating location: " + error;
+          });
+        }, function(error) {
+          document.getElementById("status").innerText = "❌ Location error: " + error.message;
+        });
+      } else {
+        document.getElementById("status").innerText = "❌ Geolocation is not supported.";
+      }
+    }
+  </script>
+</body>
+</html>

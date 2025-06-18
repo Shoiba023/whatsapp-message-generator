@@ -29,6 +29,15 @@ h1 {
   font-size: 24px;
   color: #2c3e50;
 }
+label {
+  font-weight: 500;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.container {
+  padding: 25px 20px;
+}
 
 label {
   font-weight: bold;

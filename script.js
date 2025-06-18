@@ -5,9 +5,8 @@ async function generateMessage() {
   const language = document.getElementById("language").value;
   const customPrompt = document.getElementById("customPrompt").value;
 
-  const finalPrompt = customPrompt || `Generate a professional WhatsApp message for a ${business} selling ${product} in ${language}. Name: ${name}`;
+  const finalPrompt = customPrompt || `Generate a professional WhatsApp message for a ${business} offering ${product} in ${language}. Name: ${name}`;
 
-  // Show loading
   document.getElementById("messageBox").innerText = "Generating...";
 
   try {
@@ -20,7 +19,8 @@ async function generateMessage() {
     document.getElementById("messageBox").innerText = data.message;
 
     const encoded = encodeURIComponent(data.message);
-    document.getElementById("whatsappLink").href = `https://wa.me/?text=${encoded}`;
+    const link = `https://wa.me/?text=${encoded}`;
+    document.getElementById("whatsappLink").href = link;
     document.getElementById("whatsappLink").innerText = "📲 Copy the message & Open in WhatsApp";
   } catch (err) {
     document.getElementById("messageBox").innerText = "❌ Error generating message.";

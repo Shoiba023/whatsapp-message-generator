@@ -24,9 +24,46 @@ function generateMessage() {
     return;
   }
 
-  // ✅ Show the generated message
+  async function generateMessage() {
+  const prompt = document.getElementById("customPrompt").value.trim();
   const messageBox = document.getElementById("messageBox");
-  messageBox.innerText = message;
+  const whatsappLink = document.getElementById("whatsappLink");
+
+  if (!prompt) {
+    alert("Please write your prompt first.");
+    return;
+  }
+
+  messageBox.innerText = "⏳ Generating AI message...";
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer YOUR_OPENAI_API_KEY" // Replace with your key
+      },
+      body: JSON.stringify({
+        model: "text-davinci-003",
+        prompt: `Write a short, friendly WhatsApp message in appropriate language based on this instruction:\n"${prompt}"`,
+        max_tokens: 80,
+        temperature: 0.7
+      })
+    });
+
+    const data = await response.json();
+    const message = data.choices[0].text.trim();
+
+    messageBox.innerText = message;
+    whatsappLink.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    whatsappLink.innerText = "Send via WhatsApp 📲";
+
+  } catch (error) {
+    messageBox.innerText = "❌ Failed to generate message. Please check your internet or API key.";
+    console.error(error);
+  }
+}
+
 
   // ✅ Update WhatsApp Link
   const whatsappLink = document.getElementById("whatsappLink");

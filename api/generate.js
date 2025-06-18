@@ -1,35 +1,21 @@
+// File: /api/generate.js
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+  const { prompt } = await req.body ? req.body : await req.json(); // fallback for Vercel
 
-  const prompt = req.body.prompt;
-  const apiKey = process.env.OPENAI_API_KEY;
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: prompt }],
+    }),
+  });
 
-  if (!apiKey) {
-    return res.status(500).json({ error: "Missing OpenAI API Key" });
-  }
+  const data = await response.json();
+  const message = data.choices?.[0]?.message?.content || "❌ No message returned";
 
-  try {
-    const response = await fetch("https://api.openai.com/v1/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: "text-davinci-003",
-        prompt: `Write a short, friendly WhatsApp message based on: "${prompt}"`,
-        max_tokens: 80,
-        temperature: 0.7
-      })
-    });
-
-    const data = await response.json();
-    const message = data.choices?.[0]?.text?.trim();
-    res.status(200).json({ message });
-  } catch (err) {
-    console.error("OpenAI error:", err);
-    res.status(500).json({ error: "Failed to generate message." });
-  }
+  res.status(200).json({ message });
 }

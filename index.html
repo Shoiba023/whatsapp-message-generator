@@ -1,68 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WhatsApp Message Generator</title>
-
-  <!-- ✅ Favicon and App Icons -->
-  <link rel="icon" type="image/png" href="assets/logo.png">
-  <link rel="apple-touch-icon" href="assets/logo.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="WA Generator">
-
-  <!-- ✅ Styles -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <div class="container">
-    <img src="assets/logo.png" alt="WMG Logo" width="120">
+    <img src="assets/logo.png" alt="WMG Logo" width="100" />
     <h1>WhatsApp Message Generator</h1>
 
-    <form>
-      <label>Name:</label>
-      <input type="text" id="name" placeholder="Your Name">
+    <label>Name:</label>
+    <input type="text" id="name" placeholder="Your Name" />
 
-      <label>Business Type:</label>
-      <select id="business">
-        <option value="Home Chef">Home Chef</option>
-        <option value="Freelancer">Freelancer</option>
-        <option value="Coach">Coach</option>
-        <option value="Product Seller">Product Seller</option>
-        <option value="Tutor">Tutor</option>
-      </select>
+    <label>Business Type:</label>
+    <select id="business">
+      <option value="Home Chef">Home Chef</option>
+      <option value="Coach">Coach</option>
+      <option value="Designer">Designer</option>
+    </select>
 
-      <label>Product / Service:</label>
-      <select id="product">
-        <option value="Chicken Biryani">Chicken Biryani</option>
-        <option value="Graphic Design">Graphic Design</option>
-        <option value="Wellness Session">Wellness Session</option>
-        <option value="Math Tutoring">Math Tutoring</option>
-        <option value="Handmade Candles">Handmade Candles</option>
-      </select>
+    <label>Product / Service:</label>
+    <select id="product">
+      <option value="Chicken Biryani">Chicken Biryani</option>
+      <option value="Training Session">Training Session</option>
+    </select>
 
-      <label>Language:</label>
-      <select id="language">
-        <option value="English">English</option>
-        <option value="Urdu">Urdu</option>
-        <option value="Hindi">Hindi</option>
-        <option value="French">French</option>
-      </select>
+    <label>Language:</label>
+    <select id="language">
+      <option value="English">English</option>
+      <option value="Urdu">Urdu</option>
+      <option value="Hindi">Hindi</option>
+    </select>
 
-      <label for="customPrompt">✏️ Or write your own custom message:</label>
-      <textarea id="customPrompt" rows="4" placeholder="Type your own message here..."></textarea>
+    <label>✏️ Or write your own custom message:</label>
+    <textarea id="customPrompt" rows="4" placeholder="Type your own message here..."></textarea>
 
-      <button type="button" onclick="generateMessage()">Generate Message</button>
-    </form>
-
-    <div id="messageBox" class="message-output"></div>
-    <button onclick="copyMessage()">Copy</button>
-    <a id="whatsappLink" target="_blank">Send via WhatsApp</a>
+    <button onclick="generateMessage()">Generate Message</button>
+    <div id="messageBox" class="output"></div>
+    <a id="whatsappLink" target="_blank"></a>
   </div>
 
-  <!-- ✅ Script -->
   <script src="script.js"></script>
 </body>
 </html>

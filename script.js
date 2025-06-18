@@ -1,38 +1,28 @@
 async function generateMessage() {
-  const prompt = document.getElementById("customPrompt").value.trim();
-  const messageBox = document.getElementById("messageBox");
-  const whatsappLink = document.getElementById("whatsappLink");
+  const name = document.getElementById("name").value;
+  const business = document.getElementById("business").value;
+  const product = document.getElementById("product").value;
+  const language = document.getElementById("language").value;
+  const customPrompt = document.getElementById("customPrompt").value;
 
-  if (!prompt) {
-    alert("Please write a message prompt.");
-    return;
-  }
+  const finalPrompt = customPrompt || `Generate a professional WhatsApp message for a ${business} selling ${product} in ${language}. Name: ${name}`;
 
-  messageBox.innerText = "⏳ Generating message...";
+  // Show loading
+  document.getElementById("messageBox").innerText = "Generating...";
 
   try {
-    const response = await fetch("/api/generate", {
+    const res = await fetch("/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ prompt: finalPrompt }),
     });
+    const data = await res.json();
+    document.getElementById("messageBox").innerText = data.message;
 
-    const data = await response.json();
-
-    if (data.message) {
-      messageBox.innerText = data.message;
-      whatsappLink.href = `https://wa.me/?text=${encodeURIComponent(data.message)}`;
-      whatsappLink.innerText = "Send via WhatsApp 📲";
-    } else {
-      messageBox.innerText = "❌ Message generation failed.";
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    messageBox.innerText = "❌ Server error. Try again.";
+    const encoded = encodeURIComponent(data.message);
+    document.getElementById("whatsappLink").href = `https://wa.me/?text=${encoded}`;
+    document.getElementById("whatsappLink").innerText = "📲 Copy the message & Open in WhatsApp";
+  } catch (err) {
+    document.getElementById("messageBox").innerText = "❌ Error generating message.";
   }
 }
-.catch(error => {
-  const messageBox = document.getElementById("messageBox");
-  messageBox.innerText = "❌ Server error: " + error.message;
-  console.error("Detailed error:", error);
-});

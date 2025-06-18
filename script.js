@@ -31,3 +31,8 @@ async function generateMessage() {
     messageBox.innerText = "❌ Server error. Try again.";
   }
 }
+.catch(error => {
+  const messageBox = document.getElementById("messageBox");
+  messageBox.innerText = "❌ Server error: " + error.message;
+  console.error("Detailed error:", error);
+});

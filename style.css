@@ -1,118 +1,26 @@
-/* Base Styling */
 body {
+  font-family: sans-serif;
+  background: #f5f5f5;
   margin: 0;
-  padding: 0;
-  font-family: "Segoe UI", sans-serif;
-  background-color: #f5f5f5;
-  color: #222;
+  padding: 20px;
 }
-
 .container {
   max-width: 500px;
-  margin: 40px auto;
-  padding: 25px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 128, 0, 0.1);
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
-.logo {
+input, select, textarea, button {
   display: block;
-  width: 120px;
-  margin: 0 auto 15px auto;
-}
-
-h1 {
-  text-align: center;
-  color: #128c7e;
-  font-size: 24px;
-  margin-bottom: 25px;
-}
-
-/* Form */
-form label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #333;
-}
-
-form input,
-form select {
   width: 100%;
+  margin-top: 10px;
   padding: 10px;
-  margin-top: 6px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-sizing: border-box;
-  font-size: 15px;
 }
-
-form button {
-  width: 100%;
-  background-color: #25d366;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 16px;
+.output {
   margin-top: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-form button:hover {
-  background-color: #1ebd58;
-}
-#customPrompt {
-  width: 100%;
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  resize: vertical;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-/* Output Message Box */
-#output {
-  margin-top: 30px;
-  text-align: center;
-}
-
-#messageBox {
-  width: 100%;
-  height: 100px;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 15px;
-  resize: none;
-  margin-bottom: 10px;
-}
-
-#output button {
-  background-color: #075e54;
-  color: #fff;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-#output a {
-  display: inline-block;
-  background-color: #128c7e;
-  color: #fff;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 8px;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
-#output a:hover {
-  background-color: #0e6f61;
+  background: #eef;
+  border-radius: 5px;
 }

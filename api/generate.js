@@ -1,5 +1,3 @@
-// ✅ File: /api/generate.js
-
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -17,19 +15,18 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
         model: "text-davinci-003",
-        prompt: `Write a short, friendly WhatsApp message in the correct language based on: \"${prompt}\"`,
+        prompt: `Write a short, friendly WhatsApp message based on: "${prompt}"`,
         max_tokens: 80,
-        temperature: 0.7,
-      }),
+        temperature: 0.7
+      })
     });
 
     const data = await response.json();
     const message = data.choices?.[0]?.text?.trim();
-
     res.status(200).json({ message });
   } catch (err) {
     console.error("OpenAI error:", err);
